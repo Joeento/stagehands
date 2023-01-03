@@ -16,7 +16,6 @@ DEST_DIR = 'dest/'
 
 def cosine_distance_matching(A, B):
     cos_sim = dot(A, B)/(norm(A) * norm(B))
-    return cos_sim
 
     distance = 2 * (1 - cos_sim);
     return math.sqrt(distance);
@@ -61,6 +60,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     filename1 = args.filename1
-    filename2 = args.filename1
+    filename2 = args.filename2
 
     match(filename1, filename2)
