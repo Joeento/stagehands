@@ -16,7 +16,6 @@ DEST_DIR = 'dest/'
 
 def cosine_distance_matching(A, B):
     cos_sim = dot(A, B)/(norm(A) * norm(B))
-    return cos_sim
 
     distance = 2 * (1 - cos_sim);
     return math.sqrt(distance);
@@ -42,7 +41,8 @@ def match(filename1, filename2):
 
     pose_vector_1 = []
     for id, landmark in enumerate(pose1.pose_landmarks.landmark):
-        pose_vector_1.append(landmark.x)
+        print(id)
+	pose_vector_1.append(landmark.x)
         pose_vector_1.append(landmark.y)
 
     pose_vector_2 = []
@@ -61,6 +61,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     filename1 = args.filename1
-    filename2 = args.filename1
+    filename2 = args.filename2
 
     match(filename1, filename2)
