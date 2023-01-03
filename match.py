@@ -15,7 +15,7 @@ SOURCE_DIR ='source/'
 DEST_DIR = 'dest/'
 
 def cosine_distance_matching(A, B):
-    cos_sim = dot(a, b)/(norm(a) * norm(b))
+    cos_sim = dot(A, B)/(norm(A) * norm(B))
     return cos_sim
 
     distance = 2 * (1 - cos_sim);
@@ -41,15 +41,15 @@ def match(filename1, filename2):
         print(pose1.pose_landmarks)
 
     pose_vector_1 = []
-    for landmark in enumerate(pose1.pose_landmarks.landmark):
+    for id, landmark in enumerate(pose1.pose_landmarks.landmark):
         pose_vector_1.append(landmark.x)
         pose_vector_1.append(landmark.y)
 
     pose_vector_2 = []
-    for landmark in enumerate(pose2.pose_landmarks.landmark):
+    for id, landmark in enumerate(pose2.pose_landmarks.landmark):
         pose_vector_2.append(landmark.x)
         pose_vector_2.append(landmark.y)
-    print("CDM: " + cosine_distance_matching(pose_vector_1, pose_vector_2))
+    print("CDM: " + str(cosine_distance_matching(pose_vector_1, pose_vector_2)))
 
     cv2.imwrite(DEST_DIR + filename1, image1)
 
