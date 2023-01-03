@@ -40,8 +40,15 @@ def match(filename1, filename2):
         print("Pose 1")
         print(pose1.pose_landmarks)
 
-    pose_vector_1 = [landmark.x, landmark.y for landmark in pose1.pose_landmarks]
-    pose_vector_2 = [landmark.x, landmark.y for landmark in pose2.pose_landmarks]
+    pose_vector_1 = []
+    for landmark in pose1.pose_landmarks:
+        pose_vector_1.append(landmark.x)
+        pose_vector_1.append(landmark.y)
+
+    pose_vector_2 = []
+    for landmark in pose2.pose_landmarks:
+        pose_vector_2.append(landmark.x)
+        pose_vector_2.append(landmark.y)
     print("CDM: " + cosine_distance_matching(pose_vector_1, pose_vector_2))
 
     cv2.imwrite(DEST_DIR + filename1, image1)
