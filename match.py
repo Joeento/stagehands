@@ -41,7 +41,8 @@ def match(filename1, filename2):
 
     pose_vector_1 = []
     for id, landmark in enumerate(pose1.pose_landmarks.landmark):
-        pose_vector_1.append(landmark.x)
+        print(id)
+	pose_vector_1.append(landmark.x)
         pose_vector_1.append(landmark.y)
 
     pose_vector_2 = []
