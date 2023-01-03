@@ -39,6 +39,11 @@ def match(filename1, filename2):
         print("Pose 1")
         print(pose1.pose_landmarks)
 
+    if pose2.pose_landmarks:
+        mpDraw.draw_landmarks(image2, pose2.pose_landmarks, mpPose.POSE_CONNECTIONS)
+        print("Pose 2")
+        print(pose2.pose_landmarks)
+
     pose_vector_1 = []
     for id, landmark in enumerate(pose1.pose_landmarks.landmark):
         print(id)
@@ -52,6 +57,7 @@ def match(filename1, filename2):
     print("CDM: " + str(cosine_distance_matching(pose_vector_1, pose_vector_2)))
 
     cv2.imwrite(DEST_DIR + filename1, image1)
+    cv2.imwrite(DEST_DIR + filename2, image2)
 
 
 if __name__ == "__main__":
