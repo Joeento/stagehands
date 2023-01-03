@@ -2,6 +2,7 @@ import argparse
 import cv2
 import mediapipe as mp
 import time
+import math
 
 from numpy import dot
 from numpy.linalg import norm
@@ -13,9 +14,12 @@ mpDraw = mp.solutions.drawing_utils
 SOURCE_DIR ='source/'
 DEST_DIR = 'dest/'
 
-def cosine_similarity(A, B):
-    cos_sim = dot(a, b)/(norm(a)*norm(b))
+def cosine_distance_matching(A, B):
+    cos_sim = dot(a, b)/(norm(a) * norm(b))
     return cos_sim
+
+    distance = 2 * (1 - cos_sim);
+    return math.sqrt(distance);
 
 def read_poses(image1, image2):
     imgRGB1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
@@ -35,6 +39,10 @@ def match(filename1, filename2):
         mpDraw.draw_landmarks(image1, pose1.pose_landmarks, mpPose.POSE_CONNECTIONS)
         print("Pose 1")
         print(pose1.pose_landmarks)
+
+    pose_vector_1 = [landmark.x, landmark.y for landmark in pose1.pose_landmarks]
+    pose_vector_2 = [landmark.x, landmark.y for landmark in pose2.pose_landmarks]
+    print("CDM: " + cosine_distance_matching(pose_vector_1, pose_vector_2))
 
     cv2.imwrite(DEST_DIR + filename1, image1)
 
